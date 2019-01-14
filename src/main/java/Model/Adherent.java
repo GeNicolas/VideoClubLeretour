@@ -36,7 +36,7 @@ public class Adherent {
 		@AttributeOverride(name = "ville", column =@Column(name="city", length=90)),
 		@AttributeOverride(name = "codePostal", column =@Column(name="zipcode", length=90))
 	})
-	Adresse adresses;
+	private Adresse adresses;
 	
 	@OneToMany(mappedBy="emprunteur")
 	List<Article> articles;

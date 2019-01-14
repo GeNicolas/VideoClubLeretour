@@ -80,7 +80,7 @@ public class DaoFilmJpaImpl implements DaoFilm {
 		tx = em.getTransaction();
 		try {
 			tx.begin();
-			film = em.find(Film.class, obj.getId_film());
+			film = em.find(Film.class, obj.getIdFilm());
 			
 			if (film.getArticles()!=null) {
 				for (int i=0; i<film.getArticles().size(); i++ ) {

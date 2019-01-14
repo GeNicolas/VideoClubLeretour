@@ -24,8 +24,8 @@ public class Realisateur {
 	@Column(name = "nom_realisateur", nullable=false)
 	private String nom;
 	
-	@OneToMany(mappedBy="associationRealisateurFilmPk,film")
-	private Set<AssocationRealisateurFilm> films;
+	@OneToMany(mappedBy="associationRealisateurFilmPk.realisateur")
+	private Set<AssocationRealisateurFilm> associationRealisateurFilmPk;
 	
 	// Constructeurs
 	
@@ -65,12 +65,13 @@ public class Realisateur {
 		this.idRealisateur = idRealisateur;
 	}
 
-	public Set<AssocationRealisateurFilm> getFilms() {
-		return films;
+
+	public Set<AssocationRealisateurFilm> getAssociationRealisateurFilmPk() {
+		return associationRealisateurFilmPk;
 	}
 
-	public void setFilms(Set<AssocationRealisateurFilm> films) {
-		this.films = films;
+	public void setAssociationRealisateurFilmPk(Set<AssocationRealisateurFilm> associationRealisateurFilmPk) {
+		this.associationRealisateurFilmPk = associationRealisateurFilmPk;
 	}
 
 	@Override

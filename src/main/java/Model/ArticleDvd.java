@@ -1,5 +1,6 @@
 package Model;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value="D")
 public class ArticleDvd extends Article {
 	
+	@Column(name="bonus")
 	private boolean bonus;
 
 	public ArticleDvd() {

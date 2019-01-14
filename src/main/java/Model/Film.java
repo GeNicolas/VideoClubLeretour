@@ -29,8 +29,8 @@ public class Film {
 	@OneToMany(mappedBy="film")
 	private List<Article> articles;
 	
-	@OneToMany(mappedBy="associationRealisateurFilmPk,realisateur")
-	private Set<AssocationRealisateurFilm> realisateurs;
+	@OneToMany(mappedBy="associationRealisateurFilmPk.film")
+	private Set<AssocationRealisateurFilm> associationRealisateurFilmPk;
 	
 	
 	
@@ -82,16 +82,13 @@ public class Film {
 
 	
 
-	public Set<AssocationRealisateurFilm> getRealisateurs() {
-		return realisateurs;
+	public Set<AssocationRealisateurFilm> getAssociationRealisateurFilmPk() {
+		return associationRealisateurFilmPk;
 	}
 
-	public void setRealisateurs(Set<AssocationRealisateurFilm> realisateurs) {
-		this.realisateurs = realisateurs;
+	public void setAssociationRealisateurFilmPk(Set<AssocationRealisateurFilm> associationRealisateurFilmPk) {
+		this.associationRealisateurFilmPk = associationRealisateurFilmPk;
 	}
-	
-	
-	
 
 	@Override
 	public int hashCode() {

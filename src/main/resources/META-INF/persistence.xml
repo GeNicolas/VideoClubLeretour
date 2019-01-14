@@ -7,7 +7,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/VideoClub" />
+			<property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/videoClub" />
 			<property name="hibernate.connection.driver" value="org.postgresql.Driver" />
 			<property name="hibernate.connection.user" value="postgres"/>
 			<property name="hibernate.connection.password" value="root" />
