@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import Model.Adherent;
 import Model.Film;
 import util.Context;
 
@@ -75,11 +76,20 @@ public class DaoFilmJpaImpl implements DaoFilm {
 	public void delete(Film obj) {
 		EntityManager em = Context.getContext().createEntityManager();
 		EntityTransaction tx = null;
-		
+		Film film = null;
 		tx = em.getTransaction();
 		try {
 			tx.begin();
-			em.remove(em.merge(obj));
+			film = em.find(Film.class, obj.getId_film());
+			
+			if (film.getArticles()!=null) {
+				for (int i=0; i<film.getArticles().size(); i++ ) {
+					film.getArticles().get(i).setFilm(null);
+				}
+					
+			}
+			
+			em.remove(film);
 			tx.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -96,11 +106,20 @@ public class DaoFilmJpaImpl implements DaoFilm {
 	public void deleteByKey(Integer key) {
 		EntityManager em = Context.getContext().createEntityManager();
 		EntityTransaction tx = null;
-		
+		Film film = null;
 		tx = em.getTransaction();
 		try {
 			tx.begin();
-			em.remove(em.find(Film.class, key));
+			film = em.find(Film.class, key);
+			
+			if (film.getArticles()!=null) {
+				for (int i=0; i<film.getArticles().size(); i++ ) {
+					film.getArticles().get(i).setFilm(null);
+				}
+					
+			}
+			
+			em.remove(film);
 			tx.commit();
 		}catch(Exception e) {
 			e.printStackTrace();

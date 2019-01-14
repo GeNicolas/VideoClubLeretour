@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -17,16 +19,18 @@ import javax.persistence.Transient;
 @SequenceGenerator(name="seqArticle", sequenceName = "seq_article", allocationSize = 1, initialValue =1)
 @Inheritance(strategy =InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", length=1)
-public class Article {
+public abstract class Article {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqArticle")
 	private Integer noArticle;
-	@Column(name = "nbDisques", nullable=true)
+	@Column(name = "nb_disques", nullable=true)
 	private Integer nbDisques;
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="adherent_id")
 	private Adherent emprunteur;
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="film_id")
 	private Film film;
 	
 	
@@ -36,9 +40,9 @@ public class Article {
 		super();
 	}
 
-	public Article(Integer noArticle, Integer nbDisques) {
+	public Article(Integer nbDisques) {
 		super();
-		this.noArticle = noArticle;
+		
 		this.nbDisques = nbDisques;
 	}
 

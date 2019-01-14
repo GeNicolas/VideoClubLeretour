@@ -4,7 +4,7 @@ public class DaoAdherentFactory {
 	
 public static DaoAdherentJpaImpl singleton=null;
 	
-	public static DaoAdherentJpaImpl getCompetenceFactory() {
+	public static DaoAdherentJpaImpl getAdherentFactory() {
 		if (singleton == null)
 			singleton = new DaoAdherentJpaImpl();
 		

@@ -2,32 +2,35 @@ package Model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "article")
+@Table(name = "film")
 @SequenceGenerator(name="seqFilm", sequenceName = "seq_film", allocationSize = 1, initialValue =1)
 public class Film {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqFilm")
-	private Integer id_film;
+	private Integer idFilm;
 	@Column(name = "titre_film", length =150,nullable=false)
 	private String titre;
 	@Column(name = "date_sortie", nullable=true)
 	private Date dateSortie;
-	@Transient
+	@OneToMany(mappedBy="film")
 	private List<Article> articles;
-	@Transient
-	private Realisateur realisateur;
+	
+	@OneToMany(mappedBy="associationRealisateurFilmPk,realisateur")
+	private Set<AssocationRealisateurFilm> realisateurs;
 	
 	
 	
@@ -41,12 +44,12 @@ public class Film {
 		this.titre = titre;
 	}
 
-	public Integer getId_film() {
-		return id_film;
+	public Integer getIdFilm() {
+		return idFilm;
 	}
 
-	public void setId_film(Integer id_film) {
-		this.id_film = id_film;
+	public void setIdFilm(Integer idFilm) {
+		this.idFilm = idFilm;
 	}
 
 	public String getTitre() {
@@ -77,19 +80,24 @@ public class Film {
 		this.articles = articles;
 	}
 
-	public Realisateur getRealisateur() {
-		return realisateur;
+	
+
+	public Set<AssocationRealisateurFilm> getRealisateurs() {
+		return realisateurs;
 	}
 
-	public void setRealisateur(Realisateur realisateur) {
-		this.realisateur = realisateur;
+	public void setRealisateurs(Set<AssocationRealisateurFilm> realisateurs) {
+		this.realisateurs = realisateurs;
 	}
+	
+	
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id_film == null) ? 0 : id_film.hashCode());
+		result = prime * result + ((idFilm == null) ? 0 : idFilm.hashCode());
 		result = prime * result + ((titre == null) ? 0 : titre.hashCode());
 		return result;
 	}
@@ -103,10 +111,10 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-		if (id_film == null) {
-			if (other.id_film != null)
+		if (idFilm == null) {
+			if (other.idFilm != null)
 				return false;
-		} else if (!id_film.equals(other.id_film))
+		} else if (!idFilm.equals(other.idFilm))
 			return false;
 		if (titre == null) {
 			if (other.titre != null)

@@ -1,10 +1,13 @@
 package Model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,11 +18,14 @@ public class Realisateur {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqRealisateur")
-	private Integer id_realisateur;
+	private Integer idRealisateur;
 	@Column(name = "prenom_realisateur", nullable=false)
 	private String prenom;
 	@Column(name = "nom_realisateur", nullable=false)
 	private String nom;
+	
+	@OneToMany(mappedBy="associationRealisateurFilmPk,film")
+	private Set<AssocationRealisateurFilm> films;
 	
 	// Constructeurs
 	
@@ -48,12 +54,30 @@ public class Realisateur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	
+
+	public Integer getIdRealisateur() {
+		return idRealisateur;
+	}
+
+	public void setIdRealisateur(Integer idRealisateur) {
+		this.idRealisateur = idRealisateur;
+	}
+
+	public Set<AssocationRealisateurFilm> getFilms() {
+		return films;
+	}
+
+	public void setFilms(Set<AssocationRealisateurFilm> films) {
+		this.films = films;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id_realisateur == null) ? 0 : id_realisateur.hashCode());
+		result = prime * result + ((idRealisateur == null) ? 0 : idRealisateur.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
 		return result;
@@ -68,10 +92,10 @@ public class Realisateur {
 		if (getClass() != obj.getClass())
 			return false;
 		Realisateur other = (Realisateur) obj;
-		if (id_realisateur == null) {
-			if (other.id_realisateur != null)
+		if (idRealisateur == null) {
+			if (other.idRealisateur != null)
 				return false;
-		} else if (!id_realisateur.equals(other.id_realisateur))
+		} else if (!idRealisateur.equals(other.idRealisateur))
 			return false;
 		if (nom == null) {
 			if (other.nom != null)

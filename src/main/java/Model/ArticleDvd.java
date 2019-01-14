@@ -14,8 +14,8 @@ public class ArticleDvd extends Article {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArticleDvd(Integer noArticle, Integer nbDisques, boolean bonus) {
-		super(noArticle, nbDisques);
+	public ArticleDvd(Integer nbDisques, boolean bonus) {
+		super(nbDisques);
 		this.bonus = bonus;
 		// TODO Auto-generated constructor stub
 	}

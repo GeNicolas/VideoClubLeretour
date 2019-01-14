@@ -6,32 +6,33 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import Model.Adherent;
-
+import Model.Article;
+import Model.AssocationRealisateurFilm;
+import Model.AssociationRealisateurFilmPk;
 import util.Context;
 
-public class DaoAdherentJpaImpl implements DaoAdherent {
+public class DaoAssociationRealisateurFilmJpaImpl implements DaoAssociationRealisateurFilm {
 
 	@Override
-	public List<Adherent> findAll() {
+	public List<AssocationRealisateurFilm> findAll() {
 		EntityManager em = Context.getContext().createEntityManager();
-		List<Adherent> adherents =null;
-		Query query = em.createQuery("from Adherent");
-		adherents = query.getResultList();
-		return adherents;
+		List<AssocationRealisateurFilm> asso =null;
+		Query query = em.createQuery("from association_realisateur_film");
+		asso = query.getResultList();
+		return asso;
 	}
 
 	@Override
-	public Adherent findByKey(Integer key) {
+	public AssocationRealisateurFilm findByKey(AssociationRealisateurFilmPk key) {
 		EntityManager em = Context.getContext().createEntityManager();
-		Adherent adh=null;
-		adh = em.find(Adherent.class, key);
+		AssocationRealisateurFilm asso=null;
+		asso = em.find(AssocationRealisateurFilm.class, key);
 		
-		return adh;
+		return asso;
 	}
 
 	@Override
-	public void insert(Adherent obj) {
+	public void insert(AssocationRealisateurFilm obj) {
 		EntityManager em = Context.getContext().createEntityManager();
 		EntityTransaction tx = null;
 		
@@ -52,7 +53,7 @@ public class DaoAdherentJpaImpl implements DaoAdherent {
 	}
 
 	@Override
-	public void update(Adherent obj) {
+	public void update(AssocationRealisateurFilm obj) {
 		EntityManager em = Context.getContext().createEntityManager();
 		EntityTransaction tx = null;
 		
@@ -73,23 +74,14 @@ public class DaoAdherentJpaImpl implements DaoAdherent {
 	}
 
 	@Override
-	public void delete(Adherent obj) {
+	public void delete(AssocationRealisateurFilm obj) {
 		EntityManager em = Context.getContext().createEntityManager();
 		EntityTransaction tx = null;
-		Adherent adherent = null;
+		
 		tx = em.getTransaction();
 		try {
 			tx.begin();
-			adherent = em.find(Adherent.class, obj.getNoAdherent());
-			
-			if (adherent.getArticles()!=null) {
-				for (int i=0; i<adherent.getArticles().size(); i++ ) {
-					adherent.getArticles().get(i).setEmprunteur(null);
-				}
-					
-			}
-			
-			em.remove(adherent);
+			em.remove(em.merge(obj));
 			tx.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -103,23 +95,14 @@ public class DaoAdherentJpaImpl implements DaoAdherent {
 	}
 
 	@Override
-	public void deleteByKey(Integer key) {
+	public void deleteByKey(AssociationRealisateurFilmPk key) {
 		EntityManager em = Context.getContext().createEntityManager();
 		EntityTransaction tx = null;
-		Adherent adherent = null;
+		
 		tx = em.getTransaction();
 		try {
 			tx.begin();
-			adherent = em.find(Adherent.class, key);
-			
-			if (adherent.getArticles()!=null) {
-				for (int i=0; i<adherent.getArticles().size(); i++ ) {
-					adherent.getArticles().get(i).setEmprunteur(null);
-				}
-					
-			}
-			
-			em.remove(adherent);
+			em.remove(em.find(AssocationRealisateurFilm.class, key));
 			tx.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -131,7 +114,5 @@ public class DaoAdherentJpaImpl implements DaoAdherent {
 		em.close();
 		
 	}
-	
-	
 
 }

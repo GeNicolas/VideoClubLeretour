@@ -4,7 +4,7 @@ public class DaoFilmFactory {
 	
 public static DaoFilmJpaImpl singleton=null;
 	
-	public static DaoFilmJpaImpl getCompetenceFactory() {
+	public static DaoFilmJpaImpl getFilmFactory() {
 		if (singleton == null)
 			singleton = new DaoFilmJpaImpl();
 		

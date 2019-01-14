@@ -14,8 +14,8 @@ public class ArticleBluRay extends Article{
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArticleBluRay(Integer noArticle, Integer nbDisques, boolean trois_d) {
-		super(noArticle, nbDisques);
+	public ArticleBluRay(Integer nbDisques, boolean trois_d) {
+		super(nbDisques);
 		this.trois_d = trois_d;
 		// TODO Auto-generated constructor stub
 	}

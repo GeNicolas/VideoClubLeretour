@@ -67,6 +67,7 @@ public class Adresse {
 		this.codePostal = codePostal;
 	}
 
+	
 
 	@Override
 	public int hashCode() {
@@ -79,6 +80,7 @@ public class Adresse {
 		return result;
 	}
 
+	
 
 	@Override
 	public boolean equals(Object obj) {
